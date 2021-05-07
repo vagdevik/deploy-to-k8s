@@ -1,1 +1,1 @@
-# minikube-static-app
+To deploy changes automatically onto GKE
