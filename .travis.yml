@@ -12,7 +12,7 @@ before_install:
 - curl https://sdk.cloud.google.com | bash > /dev/null;
 - source $HOME/google-cloud-sdk/path.bash.inc
 - gcloud components update kubectl
-- gcloud auth activate-service-account --key-file thelab-240901-8781140c36ca.json
+- gcloud auth activate-service-account --key-file  thelab-240901-8781140c36ca.json
 - gcloud container clusters get-credentials my-cluster --zone=us-central1-c --project=thelab-240901
 - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 deploy:
