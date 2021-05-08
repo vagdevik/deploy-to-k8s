@@ -1,0 +1,22 @@
+language: generic
+sudo: required
+services:
+- docker
+env:
+  global:
+  - GIT_SHA=$(git rev-parse HEAD)
+  - CLOUDSDK_CORE_DISABLE_PROMPTS=1
+before_install:
+- openssl aes-256-cbc -K $encrypted_f98c10099352_key -iv $encrypted_f98c10099352_iv
+  -in thelab-240901-8781140c36ca.json.enc -out thelab-240901-8781140c36ca.json -d
+- curl https://sdk.cloud.google.com | bash > /dev/null;
+- source $HOME/google-cloud-sdk/path.bash.inc
+- gcloud components update kubectl
+- gcloud auth activate-service-account --key-file thelab-240901-8781140c36ca.json
+- gcloud container clusters get-credentials my-cluster --zone=us-central1-c --project=thelab-240901
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+deploy:
+  provider: script
+  script: bash deploy.sh
+  on:
+    branch: main
