@@ -1,5 +1,5 @@
 # get the hash
-GIT_SHA = $(git rev-parse HEAD)
+GIT_SHA=$(git rev-parse HEAD)
 
 # build docker-image with the recent git commit hash
 docker build -t vagdevik/static-website-k8s:$GIT_SHA .
